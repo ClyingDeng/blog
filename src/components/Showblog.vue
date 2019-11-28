@@ -1,9 +1,10 @@
 <template>
-  <div v-theme="'wide'" class="showblog">
+  <div v-theme:column="'wide'" class="showblog">
     <h2>博客首页</h2>
-    <div v-for="blog in blogs" class="singleblog">
-      <h2 v-rainbow>{{blog.title}}</h2>
-      <article>{{blog.body}}</article>
+    <input type="text" v-model="search" placeholder="请输入搜索内容" name id />
+    <div v-for="blog in filteredBlogs" class="singleblog">
+      <h2 v-rainbow>{{blog.title | to-uppercase}}</h2>
+      <article>{{blog.body | snippet}}</article>
     </div>
   </div>
 </template>
@@ -13,8 +14,32 @@ export default {
   name: "HelloWorld",
   data() {
     return {
-      blogs: []
+      blogs: [],
+      search: ""
     };
+  },
+  computed: {
+    filteredBlogs: function() {
+      return this.blogs.filter(blog => {
+        return blog.title.match(this.search);
+      });
+    }
+  },
+  filters: {
+    toUppercase(value) {
+      return value.toUpperCase();
+    }
+  },
+  directives: {
+    'rainbow': {
+      bind(el, binding, vnode) {
+        el.style.color =
+          "#" +
+          Math.random()
+            .toString(16)
+            .slice(2, 8);
+      }
+    }
   },
   created() {
     this.$http
@@ -22,7 +47,7 @@ export default {
       .then(function(data) {
         // console.log(data)
         this.blogs = data.body.slice(0, 10);
-        console.log(blogs);
+        console.log(this.blogs);
       });
   }
 };
@@ -30,11 +55,11 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-.showblog{
+.showblog {
   max-width: 800px;
   margin: 0 auto;
 }
-.singleblog{
+.singleblog {
   padding: 20px;
   margin: 20px 0;
   box-sizing: border-box;
@@ -54,5 +79,4 @@ li {
 a {
   color: #42b983;
 }
-
 </style>
