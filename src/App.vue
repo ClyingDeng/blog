@@ -1,9 +1,6 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">首页</router-link> |
-      <router-link to="/about">添加博客</router-link>
-    </div>
+    <HeadNav></HeadNav>
     <router-view/>
   </div>
 </template>
@@ -30,3 +27,11 @@
 //   }
 // }
 </style>
+<script>
+import HeadNav from '@/components/Headnav'
+export default {
+  components:{
+    HeadNav
+  }
+}
+</script>
