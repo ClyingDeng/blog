@@ -5,7 +5,7 @@
         <router-link to="/" exact>首页</router-link>
       </li>
       <li>
-        <router-link to="/about" exact>添加博客</router-link>
+        <router-link to="/add" exact>添加博客</router-link>
       </li>
     </ul>
   </div>
@@ -19,7 +19,7 @@ export default {
 <style lang="scss" scoped>
 #nav {
   height: 70px;
-  background-color: crimson;
+  background-color: #409EFF;
   margin-bottom: 20px;
   text-align: center;
 }
