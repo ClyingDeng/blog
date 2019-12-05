@@ -5,7 +5,10 @@ import store from './store'
 import VueResource from 'vue-resource'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
-Vue.config.productionTip = false
+import axios from './http.js';
+
+Vue.prototype.$axios = axios;
+Vue.config.productionTip = false;
 Vue.use(ElementUI);
 
 // Vue.directive('rainbow', {
@@ -30,11 +33,13 @@ Vue.directive('theme', {
 // Vue.filter('to-uppercase',function(value){
 //   return value.toUpperCase();
 // });
-Vue.filter("snippet", function(value){
-  return value.slice(0,100) + "...";
-});
+// Vue.filter("snippet", function(value){
+//   return value.slice(0,100) + "...";
+// });
 
-Vue.use(VueResource)
+Vue.use(VueResource);
+
+
 new Vue({
   router,
   store,
